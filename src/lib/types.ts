@@ -3,8 +3,6 @@ import { z } from "zod";
 export const signUpSchema = z
   .object({
     email: z.string().min(1, "Email is required").email("Invalid email address"),
-    password: z.string().min(10, "Password must be at least 10 characters"),
-    confirmPassword: z.string(),
     fullName: z
     .string()
     .min(2, "Full name is required")
@@ -41,10 +39,7 @@ export const signUpSchema = z
         z.enum(["UI/UX", "Branding", "Web Dev", "Mobile App"])
       )
       .min(1, "Please select at least one service"),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords must match",
-    path: ["confirmPassword"],
   });
+  
 
 export type TSignUpSchema = z.infer<typeof signUpSchema>;
