@@ -1,0 +1,79 @@
+.form-wrapper {
+  max-width: 500px;
+  margin: 50px auto;
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
+}
+
+.form-title {
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  color: #222;
+  margin-bottom: 25px;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="date"] {
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  color: #222;
+}
+
+input::placeholder {
+  color: #555;
+}
+
+.section-label {
+  font-weight: bold;
+  color: #111;
+  font-size: 16px;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.checkbox-group label,
+.checkbox-label {
+  font-size: 15px;
+  color: #111;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.error-text {
+  color: #d93025;
+  font-size: 13px;
+}
+
+button {
+  background: #2563eb;
+  color: white;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  background: #1e4db7;
+}
+
+button:disabled {
+  background: #999;
+  cursor: not-allowed;
+}
