@@ -1,36 +1,99 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Client Onboarding Form (Next.js + React Hook Form + Zod)
 
-## Getting Started
+A simple, accessible client onboarding form built with Next.js (App Router), React Hook Form, and Zod. The form validates user input, displays inline errors, and submits data to an external API endpoint.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Validation**: All fields validated with Zod, integrated with React Hook Form.
+- **UX**: Inline error messages, keyboard accessible, visible focus states, disables submit while submitting, persists values on validation errors.
+- **Submission**: POSTs JSON to an external API endpoint (configurable via environment variable).
+- **Success/Error Handling**: Shows a summary on success, readable error on failure.
+- **Styling**: Uses Tailwind CSS for simple, responsive design.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Setup
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. **Install dependencies**:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
 
-## Learn More
+2. **Configure the API endpoint**:
 
-To learn more about Next.js, take a look at the following resources:
+   Create a `.env.local` file in the project root:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   ```
+   NEXT_PUBLIC_ONBOARD_URL=https://example.com/api/onboard
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   Replace the URL with your actual endpoint if needed.
 
-## Deploy on Vercel
+3. **Run the development server**:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+4. **Open the app**:
+
+   Visit [http://localhost:3000](http://localhost:3000) in your browser.
+
+## How Validation Works
+
+- The form uses [React Hook Form](https://react-hook-form.com/) for state management.
+- [Zod](https://zod.dev/) defines the schema and validation rules.
+- [@hookform/resolvers/zod](https://react-hook-form.com/docs/useform/#resolver) connects Zod to React Hook Form.
+- Inline error messages are shown under each field.
+
+## API Submission
+
+- On submit, the form sends a POST request to `NEXT_PUBLIC_ONBOARD_URL` with the validated data as JSON.
+- Headers: `Content-Type: application/json`
+- Example request body:
+
+  ```json
+  {
+    "fullName": "Ada Lovelace",
+    "email": "ada@example.com",
+    "companyName": "Analytical Engines Ltd",
+    "services": ["UI/UX", "Web Dev"],
+    "budget": 50000,
+    "projectStartDate": "2025-09-01",
+    "acceptTerms": true
+  }
+  ```
+
+- On 2xx response, a success message with a summary is shown.
+- On error, a readable error message is displayed at the top.
+
+## Accessibility & UX
+
+- All inputs have associated labels.
+- Inline error messages for each field.
+- Services are rendered as checkboxes (multi-select).
+- Date input uses the native date picker.
+- Keyboard navigable and visible focus states.
+
+## Assumptions
+
+- The external API endpoint accepts the fields as described above.
+- No file uploads are required.
+- The form does not redirect on success.
+
+## Bonus
+
+- The code is structured for easy extension (e.g., pre-filling from query params, adding unit tests for the Zod schema).
+
+## File Structure
+
+- `src/components/ClientOnboardingForm.tsx` — The main form component.
+- `src/lib/types.ts` — Zod schema and types.
+- `src/app/page.tsx` — Page entry point, renders the form.
+
+## License
+
+MIT
