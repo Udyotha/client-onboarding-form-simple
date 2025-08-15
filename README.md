@@ -93,7 +93,3 @@ A simple, accessible client onboarding form built with Next.js (App Router), Rea
 - `src/components/ClientOnboardingForm.tsx` — The main form component.
 - `src/lib/types.ts` — Zod schema and types.
 - `src/app/page.tsx` — Page entry point, renders the form.
-
-## License
-
-MIT
